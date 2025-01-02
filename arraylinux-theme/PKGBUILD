@@ -6,7 +6,7 @@ arch=('any')
 url="https://github.com/Array-Linux/PKGBUILDS/"
 license=('GPL')
 depends=('gtk3')
-source=("$pkgname-$pkgver.tar.gz::https://github.com/Array-Linux/PKGBUILDS/$pkgname-$pkgver.tar.gz")
+source=("$pkgname-$pkgver.tar.gz::https://github.com/Array-Linux/PKGBUILDS/blob/main/arraylinux-theme/$pkgname-$pkgver.tar.gz")
 sha256sums=('SKIP')
 
 package() {

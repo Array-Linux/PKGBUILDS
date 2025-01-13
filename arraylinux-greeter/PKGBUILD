@@ -11,5 +11,8 @@ sha256sums=('SKIP')
 
 package() {
     install -dm777 "$pkgdir/etc/lightdm/"
+    install -dm777 "$pkgdir/usr/share/pixmaps/"
     cp "$srcdir/lightdm-gtk-greeter.conf" "$pkgdir/etc/lightdm/lightdm-gtk-greeter.conf"
+    cp "$srcdir/arraylinux-logo.png" "/$pkgdir/usr/share/pixmaps/arraylinux-logo.png"
+    cp "$srcdir/arraylinux-wallpaper.png" "/$pkgdir/usr/share/pixmaps/arraylinux-wallpaper.png"
 }

@@ -1,4 +1,4 @@
-pkgname=arraylinux-greeter
+pkgname=array-greeter
 pkgver=1.0
 pkgrel=1
 pkgdesc="Arraylinux configuration file for LightDM GTK Greeter"

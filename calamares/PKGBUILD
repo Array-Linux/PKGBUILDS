@@ -1,0 +1,50 @@
+pkgname=calamares
+pkgver=25.01
+pkgrel=1
+pkgdesc="Calamares installer for Arraylinux"
+arch=('any')
+url="https://github.com/Array-Linux/calamares"
+license=('GPL3')
+makedepends=('git' 'cmake' 'extra-cmake-modules' 'python-jsonschema' 'python-pyaml' 'python-unidecode' 'gawk')
+conflicts=('calamares-git')
+depends=( 'qt6-svg' 'qt6-webengine' 'yaml-cpp' 'networkmanager' 'upower' 'kcoreaddons' 'kconfig' 'ki18n' 'kservice' \
+'kwidgetsaddons' 'kpmcore' 'squashfs-tools' 'rsync' 'pybind11' 'cryptsetup' 'doxygen' 'dmidecode' \
+'gptfdisk' 'hwinfo' 'kparts' 'polkit-qt6' 'python' 'solid' 'qt6-tools' 'libpwquality' 'ckbcomp' 'qt6-declarative' )
+provides=("calamares")
+options=(!strip !emptydirs)
+source=("https://github.com/Array-Linux/${pkgname}/archive/refs/tags/${pkgver}.tar.gz")
+
+sha256sums=('d5d6af211656304f629f8e9d3a3fc42e770d1ce70c29e07223b575574286ab49')
+
+prepare() {
+    replace_command='
+    {
+        gsub(/\${version}/,version);
+        gsub(/\${release_name}/,release);
+        print
+    }
+    '
+    awk -i inplace -v version="${pkgver}" -v release="${release_name}" "$replace_command" "${srcdir}/calamares-${pkgver}/data/eos/branding/endeavouros/branding.desc"
+}
+
+build() {
+    cmake -B build -S "${srcdir}/calamares-${pkgver}" \
+    -DWITH_QT6=ON \
+    -DCMAKE_BUILD_TYPE=Debug \
+    -DCMAKE_INSTALL_LIBDIR=/usr/lib \
+    -DCMAKE_INSTALL_PREFIX=/usr \
+    -DINSTALL_CONFIG=OFF \
+    -DSKIP_MODULES="dracut \
+    dummycpp dummyprocess dummypython dummypythonqt \
+    finishedq initcpio keyboardq license localeq notesqml oemid \
+    openrcdmcryptcfg plymouthcfg plasmalnf services-openrc \
+    summaryq tracking usersq webview welcomeq"
+    export DESTDIR="$srcdir/build"
+    make -C build
+}
+
+package() {
+    make -C build DESTDIR="${pkgdir}" install
+    install -dm 755 "${pkgdir}/etc"
+    cp -rp "${srcdir}/calamares-${pkgver}/data/eos" "${pkgdir}/etc/calamares"
+}

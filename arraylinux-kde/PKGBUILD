@@ -1,0 +1,17 @@
+pkgname=arraylinux-kde
+pkgver=1.0
+pkgrel=1
+pkgdesc="Arraylinux theming for KDE Plasma Desktop Enviroment"
+arch=('x86_64')
+url="https://github.com/Array-Linux/PKGBUILDS/"
+license=('GPL')
+source=("$pkgname-$pkgver.tar.gz::https://github.com/Array-Linux/PKGBUILDS/blob/main/arraylinux-kde/$pkgname-$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+package() {
+    install -dm755 "$pkgdir/usr/share/wallpapers/$pkgname"
+    install -dm755 "$pkgdir/usr/share/pixmaps"
+    cp -r "$srcdir/images/wallpaper"/* "$pkgdir/usr/share/wallpapers/$pkgname/"
+    cp "$srcdir/images/arraylinux-black.png" "$srcdir/images/arraylinux-black.svg" "$srcdir/images/arraylinux-white.png" "$srcdir/images/arraylinux-white.svg"
+    
+}

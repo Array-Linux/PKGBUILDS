@@ -1,0 +1,14 @@
+# Maintainer: Eduardo Cerqueira <eduardobarbosssa at gmail.com>
+
+pkgname=arrayl-cinnamon
+pkgver=2.2
+pkgrel=1
+pkgdesc="Arraylinux Cinnamon settings"
+arch=('any')
+license=('GPL3')
+depends=()
+source=('99_arrayl-cinnamon.gschema.override')
+sha256sums=('8300c1c0c057baf562b3947538e012c8c921f78fa2430b02d10f6d6e28133f0f')
+package() {
+	install -Dm644 "${srcdir}/99_arrayl-cinnamon.gschema.override" "${pkgdir}/usr/share/glib-2.0/schemas/99_arrayl-cinnamon.gschema.override"
+}

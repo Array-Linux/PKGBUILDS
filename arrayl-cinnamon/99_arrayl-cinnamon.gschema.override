@@ -1,0 +1,12 @@
+[org.cinnamon.desktop.background]
+picture-uri='file:///usr/share/wallpapers/arraylinux-wallpaper.png'
+
+[org.cinnamon.desktop.interface]
+cursor-theme='Qogir-dark'
+gtk-theme='adw-gtk3-dark'
+
+[org.cinnamon.theme]
+name='adw-gtk3-dark'
+
+[org.cinnamon.desktop.interface]
+icon-theme='Qogir-dark'
